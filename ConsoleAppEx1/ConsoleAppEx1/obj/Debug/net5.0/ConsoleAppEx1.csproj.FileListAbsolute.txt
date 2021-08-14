@@ -1,0 +1,16 @@
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\bin\Debug\net5.0\ConsoleAppEx1.exe
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\bin\Debug\net5.0\ConsoleAppEx1.deps.json
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\bin\Debug\net5.0\ConsoleAppEx1.runtimeconfig.json
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\bin\Debug\net5.0\ConsoleAppEx1.runtimeconfig.dev.json
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\bin\Debug\net5.0\ConsoleAppEx1.dll
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\bin\Debug\net5.0\ref\ConsoleAppEx1.dll
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\bin\Debug\net5.0\ConsoleAppEx1.pdb
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.csproj.AssemblyReference.cache
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.GeneratedMSBuildEditorConfig.editorconfig
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.AssemblyInfoInputs.cache
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.AssemblyInfo.cs
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.csproj.CoreCompileInputs.cache
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.dll
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ref\ConsoleAppEx1.dll
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.pdb
+D:\github\Assignment-4-DSA\ConsoleAppEx1\ConsoleAppEx1\obj\Debug\net5.0\ConsoleAppEx1.genruntimeconfig.cache
