@@ -4,7 +4,7 @@ namespace ConsoleAppEx1
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Hello World!");
             var myList = new DoublyLinkedList<int>();
@@ -15,14 +15,18 @@ namespace ConsoleAppEx1
             }
 
             //myList.InsertAt(777, 90);
-            myList.Reverse();
+            myList.DeleteAt(9);
+            myList.DeleteAt(5);
+            myList.DeleteAt(0);
+
+            myList.Print();
 
             foreach (var x in myList)
             {
                 Console.WriteLine(x.Value);
             }
 
-            Console.WriteLine("\n\n\t"+myList.Center());
+            Console.WriteLine("\n\n\t"+myList.Size);
         }
     }
 }

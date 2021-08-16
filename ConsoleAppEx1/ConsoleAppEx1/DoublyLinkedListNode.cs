@@ -9,40 +9,21 @@ namespace ConsoleAppEx1
 {
     public class DoublyLinkedListNode<T>
     {
-        /*
-         * [x] value
-         * [x] next 
-         * [x] previous
-         * 
-         * [x] Constructor
-         */
         public DoublyLinkedListNode(T value)
         {
             Value = value;
         }
 
         public T Value { get; set; }
+
         public DoublyLinkedListNode<T> NextNode { get; set; }
+
         public DoublyLinkedListNode<T> PreviousNode { get; set; }
     }
 
     public class DoublyLinkedList<T> :
         IEnumerable<DoublyLinkedListNode<T>>
     {
-        /*
-         * [x] head
-         * [x] tail
-         * [x] insert : insert after last node
-         * [x] insert at position
-         * [ ] delete : ???
-         * [ ] delete at position 
-         * [x] center
-         * [x] reverse
-         * [x] size
-         * [x] iterator 
-         * [ ] traverse/print
-         */
-        
         public void Insert(T value)
         {
             var newNode = new DoublyLinkedListNode<T>(value);
@@ -94,6 +75,95 @@ namespace ConsoleAppEx1
             Size++;
         }
 
+        public void Delete(T value)
+        {
+            try
+            {
+                var current = Head;
+                while (current != null)
+                {
+                    if (current.Value.Equals(value))
+                    {
+                        if (current == Head)
+                        {
+                            Head = Head.NextNode;
+                            Head.PreviousNode.NextNode = null;
+                            Head.PreviousNode = null;
+                        }
+                        else if (current == Tail)
+                        {
+                            Tail = Tail.PreviousNode;
+                            Tail.NextNode.PreviousNode = null;
+                            Tail.NextNode = null;
+                        }
+                        else
+                        {
+                            DoublyLinkedListNode<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
+                            if (previousNode != null) previousNode.NextNode = nextNode;
+                            if (nextNode != null) nextNode.PreviousNode = previousNode;
+                        }
+
+                        Size--;
+                        return;
+                    }
+                    current = current.NextNode;
+                }
+
+                Console.WriteLine("No such value in the Linked List");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void DeleteAt(int index)
+        {
+            try
+            {
+                if (index >= Size || index < 0) Console.WriteLine("Error : Invalid index {0}", index);
+                else
+                {
+                    if(index == 0)
+                    {
+                        Head = Head.NextNode;
+                        Head.PreviousNode.NextNode = null;
+                        Head.PreviousNode = null;
+                    } 
+                    else if (index == Size-1)
+                    {
+                        Tail = Tail.PreviousNode;
+                        Tail.NextNode.PreviousNode = null;
+                        Tail.NextNode = null;
+                    } 
+                    else
+                    {
+                        var current = Head;
+                        int count = 0;
+                        while (true)
+                        {
+                            if (index == count)
+                            {
+                                DoublyLinkedListNode<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
+                                if (previousNode != null) previousNode.NextNode = nextNode;
+                                if (nextNode != null) nextNode.PreviousNode = previousNode;
+                                break;
+                            }
+                            count++;
+                            current = current.NextNode;
+                        }
+                    }
+
+                    Size--;
+                    return;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
         public T Center() 
         {
             var forwardIterator = Head;
@@ -126,14 +196,11 @@ namespace ConsoleAppEx1
                 backwardIterator = backwardIterator.PreviousNode;
             }
         }
-        public DoublyLinkedListNode<T> Head { get; private set; }
-        public DoublyLinkedListNode<T> Tail { get; private set; }
-        public int Size { get; private set; }
 
         public IEnumerator<DoublyLinkedListNode<T>> GetEnumerator()
         {
             var current = Head;
-            while(current != null)
+            while (current != null)
             {
                 yield return current;
                 current = current.NextNode;
@@ -144,5 +211,22 @@ namespace ConsoleAppEx1
         {
             return GetEnumerator();
         }
+
+        public void Print()
+        {
+            var current = Head;
+            while(current != null)
+            {
+                Console.Write("{0} -> ", current.Value);
+                current = current.NextNode;
+            }
+            Console.Write("null\n");
+        }
+
+        public DoublyLinkedListNode<T> Head { get; private set; }
+
+        public DoublyLinkedListNode<T> Tail { get; private set; }
+
+        public int Size { get; private set; }
     }
 }
