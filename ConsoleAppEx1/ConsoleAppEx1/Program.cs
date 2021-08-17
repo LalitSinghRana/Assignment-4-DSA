@@ -7,18 +7,28 @@ namespace ConsoleAppEx1
         static void Main()
         {
             Console.WriteLine("Hello World!");
-            var myList = new DoublyLinkedList<int>();
+            var myList = new Stack<int>();
 
             for(int i=1; i<=10; i++)
             {
-                myList.Insert(i * 10);
+                myList.Push(i * 10);
             }
 
-            //myList.InsertAt(777, 90);
-            myList.DeleteAt(9);
-            myList.DeleteAt(5);
-            myList.DeleteAt(0);
+            myList.Print();
 
+            Console.WriteLine(myList.Peek());
+            myList.Pop();
+            Console.WriteLine(myList.Peek());
+            myList.Pop();
+            Console.WriteLine(myList.Peek());
+            myList.Pop();
+
+
+            Console.WriteLine("50 : " + myList.Contains(50));
+            Console.WriteLine("100 : " + myList.Contains(100));
+
+            
+            myList.Reverse();
             myList.Print();
 
             foreach (var x in myList)

@@ -7,30 +7,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppEx1
 {
-    public class DoublyLinkedListNode<T>
-    {
-        public DoublyLinkedListNode(T value)
-        {
-            Value = value;
-        }
-
-        public T Value { get; set; }
-
-        public DoublyLinkedListNode<T> NextNode { get; set; }
-
-        public DoublyLinkedListNode<T> PreviousNode { get; set; }
-    }
-
     public class DoublyLinkedList<T> :
-        IEnumerable<DoublyLinkedListNode<T>>
+        IEnumerable<Node<T>>
     {
         public void Insert(T value)
         {
-            var newNode = new DoublyLinkedListNode<T>(value);
+            var newNode = new Node<T>(value);
             if (Size == 0)
             {
                 Head = newNode;
-            }else
+            }
+            else
             {
                 Tail.NextNode = newNode;
                 newNode.PreviousNode = Tail;
@@ -41,9 +28,10 @@ namespace ConsoleAppEx1
 
         public void InsertAt(T value, int index)
         {
-            var newNode = new DoublyLinkedListNode<T>(value);
+            var newNode = new Node<T>(value);
 
-            if (index >= Size) {
+            if (index >= Size)
+            {
                 Insert(value);
                 return;
             }
@@ -52,12 +40,13 @@ namespace ConsoleAppEx1
                 newNode.NextNode = Head;
                 Head.PreviousNode = newNode;
                 Head = newNode;
-            }else
+            }
+            else
             {
                 int tempCount = 0;
                 var current = Head;
 
-                while(tempCount < index)
+                while (tempCount < index)
                 {
                     current = current.NextNode;
                     tempCount++;
@@ -98,7 +87,7 @@ namespace ConsoleAppEx1
                         }
                         else
                         {
-                            DoublyLinkedListNode<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
+                            Node<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
                             if (previousNode != null) previousNode.NextNode = nextNode;
                             if (nextNode != null) nextNode.PreviousNode = previousNode;
                         }
@@ -111,7 +100,7 @@ namespace ConsoleAppEx1
 
                 Console.WriteLine("No such value in the Linked List");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -124,18 +113,18 @@ namespace ConsoleAppEx1
                 if (index >= Size || index < 0) Console.WriteLine("Error : Invalid index {0}", index);
                 else
                 {
-                    if(index == 0)
+                    if (index == 0)
                     {
                         Head = Head.NextNode;
                         Head.PreviousNode.NextNode = null;
                         Head.PreviousNode = null;
-                    } 
-                    else if (index == Size-1)
+                    }
+                    else if (index == Size - 1)
                     {
                         Tail = Tail.PreviousNode;
                         Tail.NextNode.PreviousNode = null;
                         Tail.NextNode = null;
-                    } 
+                    }
                     else
                     {
                         var current = Head;
@@ -144,7 +133,7 @@ namespace ConsoleAppEx1
                         {
                             if (index == count)
                             {
-                                DoublyLinkedListNode<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
+                                Node<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
                                 if (previousNode != null) previousNode.NextNode = nextNode;
                                 if (nextNode != null) nextNode.PreviousNode = previousNode;
                                 break;
@@ -158,13 +147,13 @@ namespace ConsoleAppEx1
                     return;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
         }
 
-        public T Center() 
+        public T Center()
         {
             var forwardIterator = Head;
             var backwardIterator = Tail;
@@ -184,7 +173,7 @@ namespace ConsoleAppEx1
             var forwardIterator = Head;
             var backwardIterator = Tail;
 
-            while(forwardIterator != backwardIterator)
+            while (forwardIterator != backwardIterator)
             {
                 var tempValueHolder = forwardIterator.Value;
                 forwardIterator.Value = backwardIterator.Value;
@@ -197,7 +186,7 @@ namespace ConsoleAppEx1
             }
         }
 
-        public IEnumerator<DoublyLinkedListNode<T>> GetEnumerator()
+        public IEnumerator<Node<T>> GetEnumerator()
         {
             var current = Head;
             while (current != null)
@@ -215,7 +204,7 @@ namespace ConsoleAppEx1
         public void Print()
         {
             var current = Head;
-            while(current != null)
+            while (current != null)
             {
                 Console.Write("{0} -> ", current.Value);
                 current = current.NextNode;
@@ -223,9 +212,9 @@ namespace ConsoleAppEx1
             Console.Write("null\n");
         }
 
-        public DoublyLinkedListNode<T> Head { get; private set; }
+        public Node<T> Head { get; private set; }
 
-        public DoublyLinkedListNode<T> Tail { get; private set; }
+        public Node<T> Tail { get; private set; }
 
         public int Size { get; private set; }
     }
