@@ -7,36 +7,37 @@ namespace ConsoleAppEx1
         static void Main()
         {
             Console.WriteLine("Hello World!");
-            var myList = new Stack<int>();
 
-            for(int i=1; i<=10; i++)
+            /* Priority Queue
+            var myList = new MinPriorityQueue<int>();
+
+            for(int i=20; i>0; i--)
             {
-                myList.Push(i * 10);
+                myList.Enqueue(i);
             }
 
-            myList.Print();
+            var newList = myList.Reverse();
 
-            Console.WriteLine(myList.Peek());
-            myList.Pop();
-            Console.WriteLine(myList.Peek());
-            myList.Pop();
-            Console.WriteLine(myList.Peek());
-            myList.Pop();
+            foreach(var x in myList) Console.Write(x + ", ");
+            Console.WriteLine('\n');
+            foreach (var x in newList) Console.Write(x + ", ");
+            Console.WriteLine('\n');
 
+            Console.WriteLine("10 : {0}", myList.Contains(-1));
+            Console.WriteLine("100 : {0}", myList.Contains(100));
 
-            Console.WriteLine("50 : " + myList.Contains(50));
-            Console.WriteLine("100 : " + myList.Contains(100));
-
-            
-            myList.Reverse();
-            myList.Print();
-
-            foreach (var x in myList)
+            while (myList.Size > 0)
             {
-                Console.WriteLine(x.Value);
+                Console.Write(myList.Dequeue() + ", ");
             }
+            Console.WriteLine('\n');
 
-            Console.WriteLine("\n\n\t"+myList.Size);
+            while (newList.Size > 0)
+            {
+                Console.Write(newList.Dequeue() + ", ");
+            }
+            Console.WriteLine('\n');
+            */
         }
     }
 }
