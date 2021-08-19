@@ -8,17 +8,21 @@ namespace ConsoleAppEx1
         {
             Console.WriteLine("Hello World!");
 
-            /* Priority Queue
+            //PQCall();
+        }
+
+        static void PQCall()
+        {
             var myList = new MinPriorityQueue<int>();
 
-            for(int i=20; i>0; i--)
+            for (int i = 20; i > 0; i--)
             {
                 myList.Enqueue(i);
             }
 
             var newList = myList.Reverse();
 
-            foreach(var x in myList) Console.Write(x + ", ");
+            foreach (var x in myList) Console.Write(x + ", ");
             Console.WriteLine('\n');
             foreach (var x in newList) Console.Write(x + ", ");
             Console.WriteLine('\n');
@@ -37,7 +41,6 @@ namespace ConsoleAppEx1
                 Console.Write(newList.Dequeue() + ", ");
             }
             Console.WriteLine('\n');
-            */
         }
     }
 }
