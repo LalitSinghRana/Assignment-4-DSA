@@ -9,6 +9,43 @@ namespace ConsoleAppEx1
             Console.WriteLine("Hello World!");
 
             //PQCall();
+            //HTCall();
+        }
+
+        private static void HTCall()
+        {
+            var myHT = new HashTable<string, int>();
+            for(int i=1; i<=12; i++)
+            {
+                myHT.Insert(i.ToString(), i * 10);
+            }
+
+            Console.WriteLine(myHT.Size);
+
+            myHT.Delete(2.ToString());
+            myHT.Delete(800.ToString());
+
+            Console.WriteLine();
+
+            foreach (var x in myHT)
+            {
+                var c = x;
+                while(c != null)
+                {
+                    Console.Write(c.Value + "; ");
+                    c = c.Next;
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine(myHT.GetValueByKey("1"));
+            Console.WriteLine(myHT.GetValueByKey("0"));
+
+            Console.WriteLine();
+
+            myHT.Print();
         }
 
         static void PQCall()
