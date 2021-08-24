@@ -44,21 +44,21 @@ namespace ConsoleAppEx1
             else
             {
                 int tempCount = 0;
-                var current = Head;
+                var currentNode = Head;
 
                 while (tempCount < index)
                 {
-                    current = current.NextNode;
+                    currentNode = currentNode.NextNode;
                     tempCount++;
                 }
 
-                var previous = current.PreviousNode;
+                var previous = currentNode.PreviousNode;
 
                 previous.NextNode = newNode;
                 newNode.PreviousNode = previous;
 
-                current.PreviousNode = newNode;
-                newNode.NextNode = current;
+                currentNode.PreviousNode = newNode;
+                newNode.NextNode = currentNode;
             }
 
             Size++;
@@ -68,18 +68,18 @@ namespace ConsoleAppEx1
         {
             try
             {
-                var current = Head;
-                while (current != null)
+                var currentNode = Head;
+                while (currentNode != null)
                 {
-                    if (current.Value.Equals(value))
+                    if (currentNode.Value.Equals(value))
                     {
-                        if (current == Head)
+                        if (currentNode == Head)
                         {
                             Head = Head.NextNode;
                             Head.PreviousNode.NextNode = null;
                             Head.PreviousNode = null;
                         }
-                        else if (current == Tail)
+                        else if (currentNode == Tail)
                         {
                             Tail = Tail.PreviousNode;
                             Tail.NextNode.PreviousNode = null;
@@ -87,7 +87,7 @@ namespace ConsoleAppEx1
                         }
                         else
                         {
-                            Node<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
+                            Node<T> previousNode = currentNode.PreviousNode, nextNode = currentNode.NextNode;
                             if (previousNode != null) previousNode.NextNode = nextNode;
                             if (nextNode != null) nextNode.PreviousNode = previousNode;
                         }
@@ -95,7 +95,7 @@ namespace ConsoleAppEx1
                         Size--;
                         return;
                     }
-                    current = current.NextNode;
+                    currentNode = currentNode.NextNode;
                 }
 
                 Console.WriteLine("No such value in the Linked List");
@@ -127,19 +127,19 @@ namespace ConsoleAppEx1
                     }
                     else
                     {
-                        var current = Head;
+                        var currentNode = Head;
                         int count = 0;
                         while (true)
                         {
                             if (index == count)
                             {
-                                Node<T> previousNode = current.PreviousNode, nextNode = current.NextNode;
+                                Node<T> previousNode = currentNode.PreviousNode, nextNode = currentNode.NextNode;
                                 if (previousNode != null) previousNode.NextNode = nextNode;
                                 if (nextNode != null) nextNode.PreviousNode = previousNode;
                                 break;
                             }
                             count++;
-                            current = current.NextNode;
+                            currentNode = currentNode.NextNode;
                         }
                     }
 
@@ -188,11 +188,11 @@ namespace ConsoleAppEx1
 
         public IEnumerator<Node<T>> GetEnumerator()
         {
-            var current = Head;
-            while (current != null)
+            var currentNode = Head;
+            while (currentNode != null)
             {
-                yield return current;
-                current = current.NextNode;
+                yield return currentNode;
+                currentNode = currentNode.NextNode;
             }
         }
 
@@ -203,13 +203,13 @@ namespace ConsoleAppEx1
 
         public void Print()
         {
-            var current = Head;
-            while (current != null)
+            var currentNode = Head;
+            while (currentNode != null)
             {
-                Console.Write("{0} -> ", current.Value);
-                current = current.NextNode;
+                Console.Write("{0} -> ", currentNode.Value);
+                currentNode = currentNode.NextNode;
             }
-            Console.Write("null\n");
+            Console.Write("null\n\n");
         }
 
         public Node<T> Head { get; private set; }

@@ -6,76 +6,114 @@ namespace ConsoleAppEx1
     {
         static void Main()
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello World!\n");
+            //LinkedListFuncCall();
 
-            //PQCall();
-            //HTCall();
+            //PriorityQueueFuncCall();
+            //HashTableFuncCall();
         }
 
-        private static void HTCall()
+        static void LinkedListFuncCall()
         {
-            var myHT = new HashTable<string, int>();
-            for(int i=1; i<=12; i++)
+            var myLinkedList = new DoublyLinkedList<int>();
+
+            for (int index = 1; index <= 10; index++)
             {
-                myHT.Insert(i.ToString(), i * 10);
+                myLinkedList.Insert(index * 10);
             }
 
-            Console.WriteLine(myHT.Size);
+            myLinkedList.InsertAt(22, -2);
+            myLinkedList.InsertAt(33, 0);
+            myLinkedList.InsertAt(22, 100);
 
-            myHT.Delete(2.ToString());
-            myHT.Delete(800.ToString());
+            Console.WriteLine("After all insert and insert at statements :");
+            foreach (var node in myLinkedList) Console.Write(node.Value + ", ");
+            Console.WriteLine("\n");
+
+            myLinkedList.Delete(22);
+            Console.WriteLine("After delete 22 :");
+            myLinkedList.Print();
+
+            myLinkedList.DeleteAt(6);
+            Console.WriteLine("After delete at index 6 :");
+            myLinkedList.Print();
+
+            myLinkedList.Reverse();
+            Console.WriteLine("After reversing the linked list :");
+            myLinkedList.Print();
+
+            Console.WriteLine("Center is {0}", myLinkedList.Center());
+            Console.WriteLine("Size is " + myLinkedList.Size);
+        }
+
+        static void HashTableFuncCall()
+        {
+            var myHashTable = new HashTable<string, int>();
+            
+            for (int index=1; index<=12; index++)
+            {
+                myHashTable.Insert(index.ToString(), index * 10);
+            }
+
+            Console.WriteLine(myHashTable.Size);
+            
+            myHashTable.Delete(2.ToString());
+            myHashTable.Delete(800.ToString());
 
             Console.WriteLine();
 
-            foreach (var x in myHT)
+            foreach (var node in myHashTable)
             {
-                var c = x;
-                while(c != null)
+                var currentNode = node;
+                while(currentNode != null)
                 {
-                    Console.Write(c.Value + "; ");
-                    c = c.Next;
+                    Console.Write(currentNode.Value + "; ");
+                    currentNode = currentNode.Next;
                 }
                 Console.WriteLine();
             }
 
             Console.WriteLine();
 
-            Console.WriteLine(myHT.GetValueByKey("1"));
-            Console.WriteLine(myHT.GetValueByKey("0"));
+            Console.WriteLine(myHashTable.GetValueByKey("1"));
+            Console.WriteLine(myHashTable.GetValueByKey("0"));
 
             Console.WriteLine();
 
-            myHT.Print();
+            myHashTable.Print();
         }
 
-        static void PQCall()
+        static void PriorityQueueFuncCall()
         {
-            var myList = new MinPriorityQueue<int>();
+            var myMinPriorityQueue = new MinPriorityQueue<int>();
 
-            for (int i = 20; i > 0; i--)
+            for (int index = 10; index > 0; index--)
             {
-                myList.Enqueue(i);
+                myMinPriorityQueue.Enqueue(index);
             }
 
-            var newList = myList.Reverse();
+            // Reversing PQ
+            var myMaxPriorityQueue = myMinPriorityQueue.Reverse();
 
-            foreach (var x in myList) Console.Write(x + ", ");
+            // Checking for iterator working or not in both PQ
+            foreach (var number in myMinPriorityQueue) Console.Write(number + ", ");
             Console.WriteLine('\n');
-            foreach (var x in newList) Console.Write(x + ", ");
+            foreach (var number in myMaxPriorityQueue) Console.Write(number + ", ");
             Console.WriteLine('\n');
 
-            Console.WriteLine("10 : {0}", myList.Contains(-1));
-            Console.WriteLine("100 : {0}", myList.Contains(100));
+            Console.WriteLine("Contains -1 : {0}", myMinPriorityQueue.Contains(-1));
+            Console.WriteLine("Contains 10 : {0}\n", myMinPriorityQueue.Contains(10));
 
-            while (myList.Size > 0)
+            // Dequeing both PQ
+            while (myMinPriorityQueue.Size > 0)
             {
-                Console.Write(myList.Dequeue() + ", ");
+                Console.Write(myMinPriorityQueue.Dequeue() + ", ");
             }
             Console.WriteLine('\n');
 
-            while (newList.Size > 0)
+            while (myMaxPriorityQueue.Size > 0)
             {
-                Console.Write(newList.Dequeue() + ", ");
+                Console.Write(myMaxPriorityQueue.Dequeue() + ", ");
             }
             Console.WriteLine('\n');
         }

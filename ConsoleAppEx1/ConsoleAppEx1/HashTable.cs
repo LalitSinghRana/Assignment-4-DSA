@@ -10,70 +10,65 @@ namespace ConsoleAppEx1
 {
     class HashTable<TKey, TValue> 
     {
-        internal class HashTableEntry
+        internal class HashTableNode
         {
-            internal HashTableEntry(TKey key, TValue value)
+            internal HashTableNode(TKey key, TValue value)
             {
                 Key = key;
                 Value = value;
             }
             internal TKey Key;
             internal TValue Value;
-            internal HashTableEntry Next;
+            internal HashTableNode Next;
         }
 
-        HashTableEntry[] table = new HashTableEntry[4];
-
-        private int GetHash(TKey key) 
-        {
-            var hash = key.GetHashCode();
-            return hash < 0 ? hash*-1 : hash;
-        }
+        HashTableNode[] hashTableList = new HashTableNode[4];
 
         private int GetIndex(TKey key) {
-            return GetHash(key) % table.Length;
+            var hashCode = key.GetHashCode();
+            hashCode = hashCode > 0 ? hashCode : -hashCode;
+            return hashCode % hashTableList.Length;
         }
 
         public void Insert(TKey key, TValue value)
         {
             if (this.Contains(key)) throw new Exception("Key already exists");
 
-            if ((float)Size/table.Length >= 0.8)
+            if ((float)Size/hashTableList.Length >= 0.8)
             {
-                HashTableEntry[] oldTable = table;
-                table = new HashTableEntry[oldTable.Length * 2];
-                foreach(var oe in oldTable)
+                HashTableNode[] oldHashTableList = hashTableList;
+                hashTableList = new HashTableNode[oldHashTableList.Length * 2];
+                foreach(var hashTableEntry in oldHashTableList)
                 {
-                    if (oe == null) continue;
-                    var x = oe.Next;
-                    while(x!=null)
+                    if (hashTableEntry == null) continue;
+                    var node = hashTableEntry.Next;
+                    while(node!=null)
                     {
-                        var i = GetIndex(x.Key);
-                        var e = new HashTableEntry(x.Key, x.Value);
-                        if (table[i] == null)
+                        var newIndex = GetIndex(node.Key);
+                        var newElement = new HashTableNode(node.Key, node.Value);
+                        if (hashTableList[newIndex] == null)
                         {
-                            table[i] = new HashTableEntry(default, default);
-                            //table[i].Next = e;
+                            hashTableList[newIndex] = new HashTableNode(default, default);
                         }
-                        var current = table[i];
+                        var current = hashTableList[newIndex];
                         while (current.Next != null) current = current.Next;
-                        current.Next = e;
+                        current.Next = newElement;
 
-                        x = x.Next;
+                        node = node.Next;
                     }
                 }
             }
             
             var index = GetIndex(key);
-            var element = new HashTableEntry(key, value);
-            if (table[index] == null)
+            var element = new HashTableNode(key, value);
+            if (hashTableList[index] == null)
             {
-                table[index] = new HashTableEntry(default, default);
-                table[index].Next = element;
+                hashTableList[index] = new HashTableNode(default, default);
+                hashTableList[index].Next = element;
             }
             else
             {
-                var current = table[index];
+                var current = hashTableList[index];
                 while (current.Next != null) current = current.Next;
                 current.Next = element;
             }
@@ -86,19 +81,20 @@ namespace ConsoleAppEx1
             {
                 var index = GetIndex(key);
 
-                var prevoius = table[index];
-                if (prevoius != null)
+                var hashTableEntry = hashTableList[index];
+                if (hashTableEntry != null)
                 {
-                    var current = prevoius.Next;
-                    while (current != null)
+                    var previousNode = hashTableEntry;
+                    var currentNode = previousNode.Next;
+                    while (currentNode != null)
                     {
-                        if (current.Key.Equals(key))
+                        if (currentNode.Key.Equals(key))
                         {
-                            prevoius.Next = current.Next;
+                            previousNode.Next = currentNode.Next;
                             break;
                         }
-                        prevoius = current;
-                        current = current.Next;
+                        previousNode = currentNode;
+                        currentNode = currentNode.Next;
                     }
                 }
                 Size--;
@@ -115,14 +111,14 @@ namespace ConsoleAppEx1
         {
             var index = GetIndex(key);
 
-            var current = table[index];
-            if(current != null)
+            var hashTableEntry = hashTableList[index];
+            if(hashTableEntry != null)
             {
-                current = current.Next;
-                while (current != null)
+                var currentNode = hashTableEntry.Next;
+                while (currentNode != null)
                 {
-                    if (current.Key.Equals(key)) return true;
-                    current = current.Next;
+                    if (currentNode.Key.Equals(key)) return true;
+                    currentNode = currentNode.Next;
                 }
             }
             
@@ -131,43 +127,43 @@ namespace ConsoleAppEx1
 
         public TValue GetValueByKey(TKey key)
         {
-            var index = GetIndex(key);
-            var current = table[index];
-            if (current != null)
+            if(this.Contains(key))
             {
-                current = current.Next;
-                while (current != null)
+                var index = GetIndex(key);
+                var currentNode = hashTableList[index].Next;
+
+                while (currentNode != null)
                 {
-                    if (current.Key.Equals(key)) return current.Value;
-                    current = current.Next;
+                    if (currentNode.Key.Equals(key)) return currentNode.Value;
+                    currentNode = currentNode.Next;
                 }
             }
             Console.WriteLine("Invalid Key {0}", key);
-            return default; 
+            return default;
         }
 
-        public IEnumerator<HashTableEntry> GetEnumerator()
+        public IEnumerator<HashTableNode> GetEnumerator()
         {
-            foreach(var x in table)
+            foreach(var hashTableEntry in hashTableList)
             {
-                if(x != null) yield return x.Next;
+                if(hashTableEntry != null) yield return hashTableEntry.Next;
             }
         }
 
         public void Print()
         {
-            foreach (var x in this)
+            foreach (var headNode in this)
             {
-                var c = x;
-                while (c != null)
+                var currentNode = headNode;
+                while (currentNode != null)
                 {
-                    Console.Write(c.Value + "-> ");
-                    c = c.Next;
+                    Console.Write(currentNode.Value + "-> ");
+                    currentNode = currentNode.Next;
                 }
                 Console.Write("null\n");
             }
         }
 
-        public int Size { get; set; }
+        public int Size { get; private set; }
     }
 }
