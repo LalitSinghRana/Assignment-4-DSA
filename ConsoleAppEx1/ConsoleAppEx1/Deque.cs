@@ -9,63 +9,63 @@ namespace ConsoleAppEx1
 {
     class Deque<T> : IEnumerable<Node<T>>
     {
-        readonly DoublyLinkedList<T> myDeque = new DoublyLinkedList<T>();
+        readonly DoublyLinkedList<T> myDequeList = new DoublyLinkedList<T>();
 
         public void EnqueueHead(T value)
         {
-            myDeque.InsertAt(value, 0);
+            myDequeList.InsertAt(value, 0);
         }
 
         public void EnqueueTail(T value)
         {
-            myDeque.Insert(value);
+            myDequeList.Insert(value);
         }
 
         public T PeekHead()
         {
-            return myDeque.Head.Value;
+            return myDequeList.Head.Value;
         }
 
         public T PeekTail()
         {
-            return myDeque.Tail.Value;
+            return myDequeList.Tail.Value;
         }
 
         public void DequeueHead()
         {
-            myDeque.DeleteAt(0);
+            myDequeList.DeleteAt(0);
         }
 
         public void DequeueTail()
         {
-            myDeque.DeleteAt(Size - 1);
+            myDequeList.DeleteAt(Size - 1);
         }
 
         public bool Contains(T value)
         {
-            foreach (var tempNode in myDeque) if (tempNode.Value.Equals(value)) return true;
+            foreach (var tempNode in myDequeList) if (tempNode.Value.Equals(value)) return true;
 
             return false;
         }
 
         public void Reverse()
         {
-            myDeque.Reverse();
+            myDequeList.Reverse();
         }
 
         public void Print()
         {
-            myDeque.Print();
+            myDequeList.Print();
         }
 
         public int Size
         {
-            get { return myDeque.Size; }
+            get { return myDequeList.Size; }
         }
 
         public IEnumerator<Node<T>> GetEnumerator()
         {
-            return myDeque.GetEnumerator();
+            return myDequeList.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

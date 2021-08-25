@@ -6,11 +6,60 @@ namespace ConsoleAppEx1
     {
         static void Main()
         {
-            Console.WriteLine("Hello World!\n");
             //LinkedListFuncCall();
-
+            //StackFuncCall();
+            //QueueFuncCall();
             //PriorityQueueFuncCall();
+            //TreeFuncCall();
             //HashTableFuncCall();
+        }
+
+        static void QueueFuncCall()
+        {
+            var myQueue = new Queue<int>();
+
+            for (int index = 1; index <= 10; index++) myQueue.Enqueue(index);
+
+            Console.WriteLine("Size is " + myQueue.Size);
+            myQueue.Print();
+
+            Console.WriteLine("Peek : " + myQueue.Peek());
+            Console.WriteLine("Contains 5 : {0}", myQueue.Contains(5));
+            Console.WriteLine("Contains 55 : {0}", myQueue.Contains(55));
+
+            myQueue.Reverse();
+            Console.WriteLine("\nAfter reversing the stack : ");
+            foreach (var node in myQueue) Console.Write("{0}, ", node.Value);
+            Console.WriteLine();
+            while (myQueue.Size > 0)
+            {
+                myQueue.Dequeue();
+                Console.Write("\nAfter dequeuing, size = " + myQueue.Size);
+            }
+        }
+
+        static void StackFuncCall()
+        {
+            var myStack = new Stack<int>();
+
+            for (int index = 1; index <= 10; index++) myStack.Push(index);
+
+            Console.WriteLine("Size is " + myStack.Size);
+            myStack.Print();
+
+            Console.WriteLine("Peek : " + myStack.Peek());
+            Console.WriteLine("Contains 5 : {0}", myStack.Contains(5));
+            Console.WriteLine("Contains 55 : {0}", myStack.Contains(55));
+
+            myStack.Reverse();
+            Console.WriteLine("\nAfter reversing the stack : ");
+            foreach (var node in myStack) Console.Write("{0}, ", node.Value);
+            Console.WriteLine();
+            while(myStack.Size > 0)
+            {
+                myStack.Pop();
+                Console.Write("\nAfter poping size = " + myStack.Size);
+            }
         }
 
         static void LinkedListFuncCall()

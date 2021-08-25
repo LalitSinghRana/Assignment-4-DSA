@@ -115,9 +115,19 @@ namespace ConsoleAppEx1
                 {
                     if (index == 0)
                     {
-                        Head = Head.NextNode;
-                        Head.PreviousNode.NextNode = null;
-                        Head.PreviousNode = null;
+                        if(Size == 1)
+                        {
+                            Head.NextNode = null;
+                            Head.PreviousNode = null;
+                            Head = null;
+                            Tail = Head;
+                        }
+                        else
+                        {
+                            Head = Head.NextNode;
+                            Head.PreviousNode.NextNode = null;
+                            Head.PreviousNode = null;
+                        }
                     }
                     else if (index == Size - 1)
                     {
